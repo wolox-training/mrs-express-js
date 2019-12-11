@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/wolox-training/mrs-express-js.svg?branch=master)](https://travis-ci.com/wolox-training/mrs-express-js)
+
 # WTraining
 
 WTraining
