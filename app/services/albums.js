@@ -1,7 +1,8 @@
 const rp = require('request-promise');
+const api_url = require('../../config').common.albumsApiURL;
 
 const options = {
-  uri: process.env.JSONPLACEHOLDER_BASE_URL,
+  uri: api_url,
   headers: {
     'User-Agent': 'Request-Promise'
   },
