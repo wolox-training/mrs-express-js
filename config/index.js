@@ -28,7 +28,8 @@ const config = {
       host: process.env.DB_HOST,
       port: process.env.DB_PORT,
       username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD
+      password: process.env.DB_PASSWORD,
+      name: process.env.DB_DATABASE
     },
     api: {
       bodySizeLimit: process.env.API_BODY_SIZE_LIMIT,
@@ -43,7 +44,8 @@ const config = {
       apiDate: process.env.API_DATE || 'X-API-Date',
       packageVersion: process.env.PACKAGE_VERSION || 'X-Package-Version',
       nodeVersion: process.env.NODE_VERSION || 'X-Node-Version'
-    }
+    },
+    albumsApiURL: process.env.JSONPLACEHOLDER_BASE_URL
   }
 };
 

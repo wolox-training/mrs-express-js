@@ -1,29 +1,31 @@
 const rp = require('request-promise');
+const { defaultError } = require('../errors');
+const api_url = require('../../config').common.albumsApiURL;
 
 const options = {
-  uri: process.env.JSONPLACEHOLDER_BASE_URL,
+  uri: api_url,
   headers: {
     'User-Agent': 'Request-Promise'
   },
   json: true
 };
 
-function getAlbums() {
+const getAlbums = () => {
   options.uri = `${options.uri}/albums`;
-  rp(options)
-    .then(console.log)
+  return rp(options)
+    .then(res => res)
     .catch(e => {
-      console.log(e.message);
+      Promise.reject(defaultError(e.message));
     });
-}
+};
 
-function getPhotos() {
-  options.uri = `${options.uri}/photos`;
-  rp(options)
-    .then(console.log)
+const getPhotos = id => {
+  options.uri = `${options.uri}/albums/${id}/photos`;
+  return rp(options)
+    .then(res => res)
     .catch(e => {
-      console.log(e.message);
+      Promise.reject(defaultError(e.message));
     });
-}
+};
 
 module.exports = { getAlbums, getPhotos };
