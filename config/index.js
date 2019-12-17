@@ -44,7 +44,7 @@ const config = {
       packageVersion: process.env.PACKAGE_VERSION || 'X-Package-Version',
       nodeVersion: process.env.NODE_VERSION || 'X-Node-Version'
     },
-    albumsApiURL: process.env.JSONPLACEHOLDER_BASE_URL
+    albumsApiURL: process.env.JSONPLACEHOLDER_ALBUMS_URL
   }
 };
 

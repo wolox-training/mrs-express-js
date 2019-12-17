@@ -1,30 +1,22 @@
-const rp = require('request-promise');
+const request_promise = require('request-promise');
+const { logger } = require('express-wolox-logger');
 const api_url = require('../../config').common.albumsApiURL;
 
 const options = {
-  uri: api_url,
+  uri: `${api_url}`,
   headers: {
     'User-Agent': 'Request-Promise'
   },
   json: true
 };
 
-function getAlbums() {
-  options.uri = `${options.uri}/albums`;
-  rp(options)
-    .then(console.log)
-    .catch(e => {
-      console.log(e.message);
+exports.getAlbums = id => {
+  if (id) {
+    options.uri = `${api_url}/${id}/photos`;
+  }
+  request_promise(options)
+    .then(logger.info)
+    .catch(error => {
+      logger.error(error.message);
     });
-}
-
-function getPhotos() {
-  options.uri = `${options.uri}/photos`;
-  rp(options)
-    .then(console.log)
-    .catch(e => {
-      console.log(e.message);
-    });
-}
-
-module.exports = { getAlbums, getPhotos };
+};
