@@ -2,7 +2,7 @@ const albumsService = require('../services/albums');
 
 const getAlbums = (req, res, next) => {
   albumsService
-    .getAlbums(req)
+    .getAlbums()
     .then(albums => res.json(albums))
     .catch(next);
 };
@@ -10,7 +10,7 @@ const getAlbums = (req, res, next) => {
 const getPhotos = (req, res, next) => {
   const albumId = req.params.id;
   albumsService
-    .getPhotos(albumId)
+    .getAlbums(albumId)
     .then(photos => res.json(photos))
     .catch(next);
 };
