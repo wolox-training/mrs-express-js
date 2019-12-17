@@ -11,9 +11,7 @@ const options = {
 };
 
 exports.getAlbums = id => {
-  if (id) {
-    options.uri = `${api_url}/${id}/photos`;
-  }
+  if (id) options.uri = `${api_url}/${id}/photos`;
   return request_promise(options)
     .then(res => res)
     .catch(error => {
