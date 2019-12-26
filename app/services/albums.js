@@ -1,9 +1,9 @@
-const request_promise = require('request-promise');
+const requestPromise = require('request-promise');
 const { externalApiError } = require('../errors');
-const api_url = require('../../config').common.albumsApiURL;
+const apiUrl = require('../../config').common.albumsApiURL;
 
 const options = {
-  uri: `${api_url}`,
+  uri: `${apiUrl}`,
   headers: {
     'User-Agent': 'Request-Promise'
   },
@@ -11,8 +11,17 @@ const options = {
 };
 
 exports.getAlbums = id => {
-  if (id) options.uri = `${api_url}/${id}/photos`;
-  return request_promise(options)
+  if (id) options.uri = `${apiUrl}/${id}`;
+  requestPromise(options)
+    .then(res => res)
+    .catch(error => {
+      Promise.reject(externalApiError(error.message));
+    });
+};
+
+exports.getAlbumPhotos = id => {
+  options.uri = `${apiUrl}/${id}/photos`;
+  requestPromise(options)
     .then(res => res)
     .catch(error => {
       Promise.reject(externalApiError(error.message));
