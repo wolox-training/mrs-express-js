@@ -12,18 +12,15 @@ const options = {
 
 exports.getAlbums = id => {
   if (id) options.uri = `${apiUrl}/${id}`;
-  requestPromise(options)
-    .then(res => res)
-    .catch(error => {
-      Promise.reject(externalApiError(error.message));
-    });
+  else options.uri = apiUrl;
+  return requestPromise(options).catch(error => {
+    Promise.reject(externalApiError(error.message));
+  });
 };
 
 exports.getAlbumPhotos = id => {
   options.uri = `${apiUrl}/${id}/photos`;
-  requestPromise(options)
-    .then(res => res)
-    .catch(error => {
-      Promise.reject(externalApiError(error.message));
-    });
+  return requestPromise(options).catch(error => {
+    Promise.reject(externalApiError(error.message));
+  });
 };
