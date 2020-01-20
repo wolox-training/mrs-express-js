@@ -10,17 +10,11 @@ const options = {
   json: true
 };
 
-exports.getAlbums = id => {
-  if (id) options.uri = `${apiUrl}/${id}`;
-  requestPromise(options)
-    .then(logger.info)
-    .catch(error => {
-      logger.error(error.message);
-    });
-};
-
-exports.getAlbumPhotos = id => {
-  options.uri = `${apiUrl}/${id}/photos`;
+exports.getAlbumsAndPhotos = (id, isPhotos) => {
+  if (id) {
+    if (isPhotos) options.uri = `${apiUrl}/${id}/photos`;
+    else options.uri = `${apiUrl}/${id}`;
+  }
   requestPromise(options)
     .then(logger.info)
     .catch(error => {
