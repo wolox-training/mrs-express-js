@@ -43,7 +43,8 @@ const config = {
       apiDate: process.env.API_DATE || 'X-API-Date',
       packageVersion: process.env.PACKAGE_VERSION || 'X-Package-Version',
       nodeVersion: process.env.NODE_VERSION || 'X-Node-Version'
-    }
+    },
+    albumsApiURL: process.env.JSONPLACEHOLDER_ALBUMS_URL
   }
 };
 
