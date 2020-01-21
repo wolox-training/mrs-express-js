@@ -2,16 +2,15 @@ const albumsService = require('../services/albums');
 
 const getAlbums = (req, res, next) => {
   albumsService
-    .getAlbums()
-    .then(albums => res.json(albums))
+    .getAlbumsSource(`/${req.params.id}`)
+    .then(albums => res.status(200).send(albums))
     .catch(next);
 };
 
 const getPhotos = (req, res, next) => {
-  const albumId = req.params.id;
   albumsService
-    .getAlbums(albumId)
-    .then(photos => res.json(photos))
+    .getAlbumsSource(`/${req.params.id}/photos`)
+    .then(albums => res.status(200).send(albums))
     .catch(next);
 };
 
