@@ -1,23 +1,16 @@
 const requestPromise = require('request-promise');
-const { logger } = require('express-wolox-logger');
+const { externalApiError } = require('../errors');
 const apiUrl = require('../../config').common.albumsApiURL;
 
-const options = {
-  uri: `${apiUrl}`,
-  headers: {
-    'User-Agent': 'Request-Promise'
-  },
-  json: true
-};
-
-exports.getAlbumsAndPhotos = (id, isPhotos) => {
-  if (id) {
-    if (isPhotos) options.uri = `${apiUrl}/${id}/photos`;
-    else options.uri = `${apiUrl}/${id}`;
-  }
-  requestPromise(options)
-    .then(logger.info)
-    .catch(error => {
-      logger.error(error.message);
-    });
+exports.getAlbumsSource = source => {
+  const options = {
+    uri: `${apiUrl + source}`,
+    headers: {
+      'User-Agent': 'Request-Promise'
+    },
+    json: true
+  };
+  return requestPromise(options).catch(error => {
+    Promise.reject(externalApiError(error.message));
+  });
 };
