@@ -26,6 +26,6 @@ exports.signUp = (req, res, next) => {
   };
   userService
     .signUp(user)
-    .then(u => res.send(`${u.firstName} ${u.lastName}`))
+    .then(u => res.status(200).send(`${u.firstName} ${u.lastName}`))
     .catch(next);
 };
