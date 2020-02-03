@@ -11,6 +11,18 @@ module.exports = {
     type: 'string',
     example: 'tom.engels@wolox.com.ar'
   },
+  userFirstName: {
+    type: 'string',
+    example: 'Tom'
+  },
+  userLastName: {
+    type: 'string',
+    example: 'Engels'
+  },
+  password: {
+    type: 'string',
+    example: 'Asdf1234'
+  },
   User: {
     type: 'object',
     properties: {
@@ -22,6 +34,15 @@ module.exports = {
       },
       email: {
         $ref: '#/components/schemas/userEmail'
+      },
+      firstName: {
+        $ref: '#/components/schemas/userFirstName'
+      },
+      lastName: {
+        $ref: '#/components/schemas/userLastName'
+      },
+      password: {
+        $ref: '#/components/schemas/password'
       }
     }
   },
