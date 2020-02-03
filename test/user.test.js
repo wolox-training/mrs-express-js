@@ -27,7 +27,7 @@ describe('Sign Up tests', () => {
       .send(userToCreate)
       .then(res => {
         expect(400);
-        expect(res.body.message).toMatch(/Invalid password/);
+        expect(res.body.message[0].msg).toMatch(/Invalid password/);
       });
   });
 
@@ -36,14 +36,14 @@ describe('Sign Up tests', () => {
       email: 'user@wolox.com.ar',
       firstName: 'User',
       lastName: 'Test',
-      password: '123123123123123'
+      password: '1111111'
     };
     return request(app)
       .post('/users')
       .send(userToCreate)
       .then(res => {
         expect(400);
-        expect(res.body.message).toMatch(/Invalid password/);
+        expect(res.body.message[0].msg).toMatch(/Invalid password/);
       });
   });
 
@@ -59,7 +59,7 @@ describe('Sign Up tests', () => {
       .send(userToCreate)
       .then(res => {
         expect(400);
-        expect(res.body.message).toMatch(/Email must be part of Wolox domain/);
+        expect(res.body.message[0].msg).toMatch(/Email must be part of Wolox domain/);
       });
   });
 
@@ -74,7 +74,7 @@ describe('Sign Up tests', () => {
       .send(userToCreate)
       .then(res => {
         expect(400);
-        expect(res.body.message).toMatch(/Missing first name/);
+        expect(res.body.message[0].msg).toMatch(/Missing first name/);
       });
   });
 
@@ -89,7 +89,7 @@ describe('Sign Up tests', () => {
       .send(userToCreate)
       .then(res => {
         expect(400);
-        expect(res.body.message).toMatch(/Missing last name/);
+        expect(res.body.message[0].msg).toMatch(/Missing last name/);
       });
   });
 
