@@ -3,6 +3,13 @@ const { badRequestError } = require('../errors');
 
 const emailRegex = /\b[\w\\.-]+@wolox+\.\w{2,4}\b/;
 const passwordRegex = /^(?=.{8,})(?=.*\d)(?=.*[A-z])(?!.*\s).*$/;
+const validateError = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return next(badRequestError(errors.array()));
+  }
+  return next();
+};
 
 exports.validateSignUp = () => [
   check('firstName', 'Missing first name')
@@ -21,13 +28,6 @@ exports.validateSignUp = () => [
   check('password', 'Invalid password')
     .not()
     .isEmpty()
-    .custom(password => password.match(passwordRegex))
+    .custom(password => password.match(passwordRegex)),
+  validateError
 ];
-
-exports.validateError = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return next(badRequestError(errors.array()));
-  }
-  return next();
-};
