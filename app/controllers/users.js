@@ -1,22 +1,12 @@
+const { validateUser } = require('../utils/userValidations');
 const userService = require('../services/users');
-const bcryptService = require('../services/encryption');
-const errors = require('../errors');
-
-const passwordRegex = /^(?=.{8,})(?=.*\d)(?=.*[A-z])(?!.*\s).*$/;
-const emailRegex = /\b[\w\\.-]+@wolox+\.\w{2,4}\b/;
+const bcryptService = require('../helpers/encryption');
+const error = require('../errors');
 
 exports.signUp = (req, res, next) => {
-  if (!req.body.firstName) {
-    throw errors.badRequestError('Missing first name');
-  }
-  if (!req.body.lastName) {
-    throw errors.badRequestError('Missing last name');
-  }
-  if (!req.body.email || !req.body.email.match(emailRegex)) {
-    throw errors.badRequestError('Email must be part of Wolox domain');
-  }
-  if (!req.body.password || !req.body.password.match(passwordRegex)) {
-    throw errors.badRequestError('Invalid password');
+  const errors = validateUser(req);
+  if (errors.length > 0) {
+    throw error.paramsValidationErrors(errors);
   }
   const user = {
     firstName: req.body.firstName,
